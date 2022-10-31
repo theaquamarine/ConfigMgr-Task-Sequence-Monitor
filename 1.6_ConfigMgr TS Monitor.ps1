@@ -1275,6 +1275,14 @@ Function Read-Registry
         $regmdt = Get-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name MDTURL | Select-Object -ExpandProperty MDTURL
         $regdtformat = Get-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name DTFormat | Select-Object -ExpandProperty DTFormat
     }
+
+    if (Test-Path -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor')
+    {
+        $regsql = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name SQLServer | Select-Object -ExpandProperty SQLServer
+        $regdb = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name Database | Select-Object -ExpandProperty Database
+        $regmdt = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name MDTURL | Select-Object -ExpandProperty MDTURL
+        $regdtformat = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name DTFormat | Select-Object -ExpandProperty DTFormat
+    }
     if ($regsql -ne $Null -and $regsql -ne '')
     {
         $hash.SQLServer.Text = $regsql
