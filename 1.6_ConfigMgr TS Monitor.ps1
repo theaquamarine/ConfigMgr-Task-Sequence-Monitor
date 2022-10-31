@@ -378,7 +378,7 @@ Function Get-TaskSequenceList
     }
     catch 
     {
-        $hash.ActionOutput.Text = '[ERROR} Could not connect to SQL Server database!'
+        $hash.ActionOutput.Text = '[ERROR] Could not connect to SQL Server database! {0}' -f $_.Exception.InnerException.Message
         return
     }
     # Run SQL query
