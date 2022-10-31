@@ -484,14 +484,18 @@ Function Get-TaskSequenceData
                 from vSMS_TaskSequenceExecutionStatus tes
                 inner join v_R_System sys on tes.ResourceID = sys.ResourceID
                 inner join v_TaskSequencePackage tsp on tes.PackageID = tsp.PackageID
-                where tsp.Name = '$TS'
-                and DATEDIFF(hour,ExecutionTime,GETDATE()) < $TimePeriod
-                --and Name0 like '$SQLComputerName'
-                and ExitCode <> $ExitCode
+                where tsp.Name = @TS
+                and DATEDIFF(hour,ExecutionTime,GETDATE()) < @TimePeriod
+                --and Name0 like @SQLComputerName
+                and ExitCode <> @ExitCode
                 ORDER BY Name0 Desc
             "
             $command = $connection.CreateCommand()
             $command.CommandText = $Query
+            $command.Parameters.AddWithValue('@ts',$TS)
+            $command.Parameters.AddWithValue('@TimePeriod',$TimePeriod)
+            $command.Parameters.AddWithValue('@SQLComputerName',$SQLComputerName)
+            $command.Parameters.AddWithValue('@ExitCode',$ExitCode)
             $result = $command.ExecuteReader()
             $table = New-Object -TypeName 'System.Data.DataTable'
             $table.Load($result)
