@@ -1255,6 +1255,17 @@ Function Update-Registry
             Set-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name MDTURL -Value $hash.MDTURL.Text
             Set-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name DTFormat -Value $hash.DTFormat.SelectedItem
         }
+    } else {
+        
+        if (!(Test-Path -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor'))
+        {
+            New-Item -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -ItemType Container -Force
+        }
+
+        Set-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name SQLServer -Value $hash.SQLServer.Text
+        Set-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name Database -Value $hash.Database.Text
+        Set-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name MDTURL -Value $hash.MDTURL.Text
+        Set-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name DTFormat -Value $hash.DTFormat.SelectedItem
     }
 }
 
@@ -1274,6 +1285,14 @@ Function Read-Registry
         $regdb = Get-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name Database | Select-Object -ExpandProperty Database
         $regmdt = Get-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name MDTURL | Select-Object -ExpandProperty MDTURL
         $regdtformat = Get-ItemProperty -Path 'HKLM:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name DTFormat | Select-Object -ExpandProperty DTFormat
+    }
+
+    if (Test-Path -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor')
+    {
+        $regsql = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name SQLServer | Select-Object -ExpandProperty SQLServer
+        $regdb = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name Database | Select-Object -ExpandProperty Database
+        $regmdt = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name MDTURL | Select-Object -ExpandProperty MDTURL
+        $regdtformat = Get-ItemProperty -Path 'HKCU:\SOFTWARE\SMSAgent\ConfigMgr Task Sequence Monitor' -Name DTFormat | Select-Object -ExpandProperty DTFormat
     }
     if ($regsql -ne $Null -and $regsql -ne '')
     {
