@@ -114,7 +114,7 @@ if (Test-Path -Path "${env:ProgramFiles(x86)}\SMSAgent\ConfigMgr Task Sequence M
                 <Label Content="Errors &#xD;&#xA;Only:" HorizontalAlignment="Left" Margin="855,0,0,0" VerticalAlignment="Top" Width="41" Height="46"/>
                 <CheckBox x:Name="ErrorsOnly" Content="" HorizontalAlignment="Left" Margin="901,18,0,0" VerticalAlignment="Top"/>
                 <Label Content="ComputerName:" HorizontalAlignment="Left" Margin="588,8,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="ComputerName" HorizontalAlignment="Left" Margin="690,7,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
+                <ComboBox x:Name="ComputerName" IsEditable="True" HorizontalAlignment="Left" Margin="690,7,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
                 <Label Content="Refresh Period &#xD;&#xA;(Minutes):" HorizontalAlignment="Left" Margin="1073,0,0,0" VerticalAlignment="Top" Height="46"/>
                 <TextBox x:Name="RefreshPeriod" HorizontalAlignment="Left" Height="26" Margin="1165,8,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="33" TextAlignment="Center" VerticalContentAlignment="Center"/>
                 <Button x:Name="RefreshNow" Content="Refresh Now!" HorizontalAlignment="Left" Margin="1204,7,0,0" VerticalAlignment="Top" Width="95" Height="29"/>
